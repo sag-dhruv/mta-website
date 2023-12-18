@@ -1,0 +1,1351 @@
+{% extends 'basic.html' %}
+
+{% block title %}
+  7-Line
+{% endblock %}
+
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/select2.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <style>
+    /* Absolute Center Spinner */
+    .loading {
+      position: fixed;
+      z-index: 999;
+      height: 2em;
+      width: 2em;
+      overflow: show;
+      margin: auto;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    /* Transparent Overlay */
+    .loading:before {
+      content: '';
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+        background: radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0, .8));
+
+      background: -webkit-radial-gradient(rgba(20, 20, 20,.8), rgba(0, 0, 0,.8));
+    }
+
+    /* :not(:required) hides these rules from IE9 and below */
+    .loading:not(:required) {
+      /* hide "loading..." text */
+      font: 0/0 a;
+      color: transparent;
+      text-shadow: none;
+      background-color: transparent;
+      border: 0;
+    }
+
+    .loading:not(:required):after {
+      content: '';
+      display: block;
+      font-size: 10px;
+      width: 1em;
+      height: 1em;
+      margin-top: -0.5em;
+      -webkit-animation: spinner 150ms infinite linear;
+      -moz-animation: spinner 150ms infinite linear;
+      -ms-animation: spinner 150ms infinite linear;
+      -o-animation: spinner 150ms infinite linear;
+      animation: spinner 150ms infinite linear;
+      border-radius: 0.5em;
+      -webkit-box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
+    box-shadow: rgba(255,255,255, 0.75) 1.5em 0 0 0, rgba(255,255,255, 0.75) 1.1em 1.1em 0 0, rgba(255,255,255, 0.75) 0 1.5em 0 0, rgba(255,255,255, 0.75) -1.1em 1.1em 0 0, rgba(255,255,255, 0.75) -1.5em 0 0 0, rgba(255,255,255, 0.75) -1.1em -1.1em 0 0, rgba(255,255,255, 0.75) 0 -1.5em 0 0, rgba(255,255,255, 0.75) 1.1em -1.1em 0 0;
+    }
+
+    /* Animation */
+
+    @-webkit-keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    @-moz-keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    @-o-keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes spinner {
+      0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <!-- about section -->
+  <body>
+    <div class="loading" style="display: none;">Loading</div>
+    <section class="service_section layout_padding">
+      <div class="container">
+        <div>
+          <div id="mta_7_line_details" delete-src="{% static 'images/bin.png' %}" edit-src="{% static 'images/edit.png' %}">
+          <div>
+          </div>
+          <div class="modal" id="mta_7_line_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 id="modal-title" class="modal-title w-100 font-weight-bold">Select Station</h4>
+                  <button type="button" class="mta_close close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body mx-3">
+                  <form id="mta_7_line_details_form">
+                    <div>
+                      <div class="form-group">
+                        <input type="radio" name="main-option" id="power_station_option" value="power" checked>
+                        <label class="modal-labels" for="power_station_option">Power Station</label>
+                        <input type="radio" name="main-option" id="passenger_station_option" value="passenger">
+                        <label class="modal-labels" for="passenger_station_option">Passenger Station</label>
+                      </div>
+                      <div class="form-group power_station_option">
+                        <select aria-describedby="Select power station" placeholder="Select power station" class="form-control" id="mta_power_stations" name="power_stations">
+                          <option name="">Select Power Station</option>
+                          <option name="Hudson34">34 St-Hudson Yards Substation</option>
+                          <option name="Ave10">10th Ave Substation</option>
+                          <option name="Ave7">7 Ave-43 St Substation</option>
+                          <option name="Park">Park Ave-41 St Substation</option>
+                          <option name="Tudor">Tudor Substation</option>
+                          <option name="Ave50">50 Ave-11 St Substation</option>
+                          <option name="Jackson">Jackson Ave-West St Substation</option>
+                          <option name="QueensBlvd">Queens Blvd-39 Place Substation</option>
+                          <option name="St58">58 St Substation</option>
+                          <option name="St78">Roosevelt-78 St Substation</option>
+                          <option name="Spruce">Corona Yard Substation</option>
+                          <option name="Corona">Lawrence Substation</option>
+                          <option name="Lawrence">Roosevelt-Spruce St Substation</option>
+                        </select>
+                      </div>
+                      <div class="form-group passenger_station_option d-none">
+                        <select aria-describedby="Select passenger station" placeholder="Select passenger station" class="form-control" id="mta_passenger_stations" name="passenger_stations">
+                          <option name="">Select Passenger Station</option>
+                          <option name="HudsonYards">HudsonYards</option>
+                          <option name="TimesSquare">TimesSquare</option>
+                          <option name="Ave5">Ave5</option>
+                          <option name="GrandCentral">GrandCentral</option>
+                          <option name="Vernon">Vernon</option>
+                          <option name="HuntersPoint">HuntersPoint</option>
+                          <option name="CourtSquare">CourtSquare</option>
+                          <option name="QueensboroPlaza">QueensboroPlaza</option>
+                          <option name="St33">St33</option>
+                          <option name="St40">St40</option>
+                          <option name="St46">St46</option>
+                          <option name="St52">St52</option>
+                          <option name="St61">St61</option>
+                          <option name="St69">St69</option>
+                          <option name="St74">St74</option>
+                          <option name="St82">St82</option>
+                          <option name="St90">St90</option>
+                          <option name="JunctionBlvd">JunctionBlvd</option>
+                          <option name="St103">St103</option>
+                          <option name="St111">St111</option>
+                          <option name="WilletsPoint">WilletsPoint</option>
+                          <option name="MainSt">MainSt</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <!-- <input class="mta-facility-option" type="checkbox" id="mta_default" name="default" value="default" />
+                        <label class="modal-labels" for="mta_default">Default</label> -->
+                        <input class="mta-facility-option" type="checkbox" id="mta_electric_vehicle" name="electric_vehicle" value="electric_vehicle" />
+                        <label class="modal-labels" for="mta_electric_vehicle">Electric Vehicle</label>
+                        <input class="mta-facility-option" type="checkbox" id="mta_energy_storage" name="energy_storage" value="energy_storage" />
+                        <label class="modal-labels" for="mta_energy_storage">Energy Storage</label>
+                        <input class="mta-facility-option solar-check-box d-none" type="checkbox" id="mta_solar" name="solar" value="solar" />
+                        <label class="modal-labels solar-check-box d-none" for="mta_solar">Solar</label>
+                      </div>
+                      <div class="md-form form-group energy_storage_expand" style="display: none;">
+                        <input class="facility-option" type="checkbox" id="mta_battery" name="battery" value="battery" />
+                        <label class="modal-labels" for="mta_battery">Battery</label>
+                        <input class="facility-option" type="checkbox" id="mta_fly_wheel" name="fly_wheel" value="fly_wheel" />
+                        <label class="modal-labels" for="mta_fly_wheel">Flywheel</label>
+                        <input class="facility-option" type="checkbox" id="mta_supercapacitor" name="supercapacitor" value="supercapacitor" />
+                        <label class="modal-labels" for="mta_supercapacitor">Supercapacitor</label>
+                      </div>
+                      <div class="form-group mta-size-parameter row">
+                        <div class="electric_vehicle_expand mb-2 col-md-6" style="display: none;">
+                          <label for="ev_size" class="mta-ev-size-expand">EV Size (MW):</label>
+                          <input label="EV Size" class="mta-ev-size-expand" type="number" id="ev_size" min="0" max="1" step="0.1" name="ev_size" value="ev_size" />
+                        </div>
+                        <div class="solar_expand col-md-6" style="display: none;">
+                          <label for="solar_size" class="mta-solar-size-expand">Solar Size (kW):</label>
+                          <input label="Solar Size" class="mta-solar-size-expand" type="number" id="solar_size" min="0" max="200" name="solar_size" value="solar_size" />
+                      </div>
+                      <div class="mta-energy_storage-parameter row">
+                        <div class="ml-lg-3 mr-3 battery_expand" style="display: none;">
+                        <label for="battery_size" class="modal-labels">Battery Size (MW):</label>
+                        <input label="Battery Size" class="facility-option" min="0" max="3" type="number" id="battery_size" step="0.1" name="battery_size" value="battery_size" />
+                      </div>
+                      <div class="ml-3 mr-3 fly_wheel_expand" style="display: none;">
+                        <label for="fly_size" class="modal-labels">Flywheel Size (MW):</label>
+                        <input label="Fly Size" class="facility-option" min="0" max="2" type="number" id="fly_size" step="0.1" name="fly_size" value="fly_size" />
+                      </div>
+                      <div class="ml-3 mr-3 supercapacitor_expand" style="display: none;">
+                        <label for="supercapacitor_size" class="modal-labels">Supercapacitor Size (MW):</label>
+                        <input label="Supercapacitor Size" class="facility-option" min="0" max="1" type="number" id="supercapacitor_size" step="0.1" name="supercapacitor_size" value="supercapacitor_size" />
+                      </div>
+                      </div>
+                    </div>
+                    </div>
+                    <a class="btn btn-primary" name="mta_form_submit"><span>submit</span></a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" id="transient_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header text-center">
+                  <h4 id="modal-title" class="modal-title w-100 font-weight-bold">Select Stations and Train Type</h4>
+                  <button type="button" class="mta_close close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body mx-3">
+                  <form id="transient_details_form">
+                    <table class="table table-borderless">
+                      <tr>
+                        <td>
+                          <label for="transient_origin_station">Origin station</label>
+                        </td>
+                        <td>
+                          <select aria-describedby="Select Origin station" placeholder="Select Origin station" class="form-control"
+                            id="transient_origin_station" name="origin_station">
+                            <option name="" value="">Select Origin Station</option>
+                            <option name="HudsonYards" value="HudsonYards">34 St-Hudson Yards</option>
+                            <option name="TimesSquare" value="TimesSquare">Times Square-42 St</option>
+                            <option name="Ave5" value="Ave5">5 Ave</option>
+                            <option name="GrandCentral" value="GrandCentral">Grand Central-42 St</option>
+                            <option name="Vernon" value="Vernon">Vernon Blvd-Jackson Av</option>
+                            <option name="HuntersPoint" value="HuntersPoint">Hunters Point Av</option>
+                            <option name="CourtSquare" value="CourtSquare">Court Square</option>
+                            <option name="QueensboroPlaza" value="QueensboroPlaza">Queensboro Plaza</option>
+                            <option name="St33" value="St33">33 St-Rawson St</option>
+                            <option name="St40" value="St40">40 St-Lowery St</option>
+                            <option name="St46" value="St46">46 St-Bliss St</option>
+                            <option name="St52" value="St52">52 St</option>
+                            <option name="St61" value="St61">61 St-Woodside</option>
+                            <option name="St69" value="St69">69 St</option>
+                            <option name="St74" value="St74">74 St-Broadway</option>
+                            <option name="St82" value="St82">82 St-Jackson Hts</option>
+                            <option name="St90" value="St90">90 St-Elmhurst Av</option>
+                            <option name="JunctionBlvd" value="JunctionBlvd">Junction Blvd</option>
+                            <option name="St103" value="St103">103 St-Corona Plaza</option>
+                            <option name="St111" value="St111">111 St</option>
+                            <option name="WilletsPoint" value="WilletsPoint">Mets-Willets Pt</option>
+                            <option name="MainSt" value="MainSt">Flushing-Main St</option>
+                          </select>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><label for="transient_destination_station">Destination station</label></td>
+                        <td><select aria-describedby="Select Destination station" placeholder="Select Destination station"
+                            class="form-control" id="transient_destination_station" name="destination_station">
+                            <option name="" value="">Select Destination Station</option>
+                            <option name="HudsonYards" value="HudsonYards">34 St-Hudson Yards</option>
+                            <option name="TimesSquare" value="TimesSquare">Times Square-42 St</option>
+                            <option name="Ave5" value="Ave5">5 Ave</option>
+                            <option name="GrandCentral" value="GrandCentral">Grand Central-42 St</option>
+                            <option name="Vernon" value="Vernon">Vernon Blvd-Jackson Av</option>
+                            <option name="HuntersPoint" value="HuntersPoint">Hunters Point Av</option>
+                            <option name="CourtSquare" value="CourtSquare">Court Square</option>
+                            <option name="QueensboroPlaza" value="QueensboroPlaza">Queensboro Plaza</option>
+                            <option name="St33" value="St33">33 St-Rawson St</option>
+                            <option name="St40" value="St40">40 St-Lowery St</option>
+                            <option name="St46" value="St46">46 St-Bliss St</option>
+                            <option name="St52" value="St52">52 St</option>
+                            <option name="St61" value="St61">61 St-Woodside</option>
+                            <option name="St69" value="St69">69 St</option>
+                            <option name="St74" value="St74">74 St-Broadway</option>
+                            <option name="St82" value="St82">82 St-Jackson Hts</option>
+                            <option name="St90" value="St90">90 St-Elmhurst Av</option>
+                            <option name="JunctionBlvd" value="JunctionBlvd">Junction Blvd</option>
+                            <option name="St103" value="St103">103 St-Corona Plaza</option>
+                            <option name="St111" value="St111">111 St</option>
+                            <option name="WilletsPoint" value="WilletsPoint">Mets-Willets Pt</option>
+                            <option name="MainSt" value="MainSt">Flushing-Main St</option>
+                          </select></td>
+                      </tr>
+                      <tr>
+                        <td><label for="transient_train_type">Train Type</label></td>
+                        <td><select aria-describedby="Select Train Type" placeholder="Select Train Type" class="form-control"
+                            id="transient_train_type" name="train_type">
+                            <option name="" value="">Select Train Type</option>
+                            <option name="local">Local</option>
+                            <option name="express">Express</option>
+                          </select></td>
+                      </tr>
+                    </table>
+                    <a class="btn btn-primary" name="transient_form_submit"><span>submit</span></a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="heading_container">
+          <h2>MTA 7-Line</h2>
+          <!-- <img src="{% static 'images/plug.png' %}" alt="" /> -->
+        </div>
+      </div>
+      <div id="content">
+        <img src="{% static 'images/7-line-map-labeled.png' %}" usemap="#image-map" />
+        <map name="image-map">
+          <!-- Power Substation -->
+          <area data-toggle="tooltip" data-placement="top" index="1" id="Hudson34" title="34 St-Hudson Yards Substation" class="mta7_lines power-station" alt="34 St-Hudson Yards Substation" image_file="{% static 'OrigGraphs_SteadyState/Hudson34.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Hudson34.png' %}" coords="4,184,32,216" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="2" id="Ave10" title="10th Ave Substation" class="mta7_lines power-station" alt="10th Ave Substation" image_file="{% static 'OrigGraphs_SteadyState/Ave10.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Ave10.png' %}" coords="48,158,76,190" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="3" id="Ave7" title="7 Ave-43 St Substation" class="mta7_lines power-station" alt="7 Ave-43 St Substation" image_file="{% static 'OrigGraphs_SteadyState/Ave7.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Ave7.png' %}" coords="84,183,112,215" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="4" id="Park" title="Park Ave-41 St Substation" class="mta7_lines power-station" alt="Park Ave-41 St Substation" image_file="{% static 'OrigGraphs_SteadyState/Park.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Park.png' %}" coords="147,211,175,243" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="5" id="Tudor" title="Tudor Substation" class="mta7_lines power-station" alt="Tudor Substation" image_file="{% static 'OrigGraphs_SteadyState/Tudor.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Tudor.png' %}" coords="188,233,216,265" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="6" id="Ave50" title="50 Ave-11 St Substation" class="mta7_lines power-station" alt="50 Ave-11 St Substation" image_file="{% static 'OrigGraphs_SteadyState/Ave50.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Ave50.png' %}" coords="313,293,341,325" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="7" id="Jackson" title="Jackson Ave-West St Substation" class="mta7_lines power-station" alt="Jackson Ave-West St Substation" image_file="{% static 'OrigGraphs_SteadyState/Jackson.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Jackson.png' %}" coords="397,231,425,263" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="8" id="QueensBlvd" title="Queens Blvd-39 Place Substation" class="mta7_lines power-station" alt="Queens Blvd-39 Place Substation" image_file="{% static 'OrigGraphs_SteadyState/QueensBlvd.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/QueensBlvd.png' %}" coords="475,279,503,311" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="9" id="St58" title="58 St Substation" class="mta7_lines power-station" alt="58 St Substation" image_file="{% static 'OrigGraphs_SteadyState/St58.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/St58.png' %}" coords="589,270,617,302" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="10" id="St78" title="Roosevelt-78 St Substation" class="mta7_lines power-station" alt="Roosevelt-78 St Substation" image_file="{% static 'OrigGraphs_SteadyState/St78.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/St78.png' %}" coords="707,253,735,285" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="11" id="Spruce" title="Roosevelt-Spruce St Substation" class="mta7_lines power-station" alt="Roosevelt-Spruce St Substation" image_file="{% static 'OrigGraphs_SteadyState/Spruce.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Spruce.png' %}" coords="849,233,877,265" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="12" id="Corona" title="Corona Yard Substation" class="mta7_lines power-station" alt="Corona Yard Substation" image_file="{% static 'OrigGraphs_SteadyState/Corona.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Corona.png' %}" coords="954,206,982,238" shape="rect" />
+          <area data-toggle="tooltip" data-placement="top" index="13" id="Lawrence" title="Lawrence Substation" class="mta7_lines power-station" alt="Lawrence Substation" image_file="{% static 'OrigGraphs_SteadyState/Lawrence.png' %}" transient_image_file="{% static 'OrigGraphs_Transient/Lawrence.png' %}" coords="1045,167,1073,199" shape="rect" />
+          <!-- Passenger Station -->
+          <area id="HudsonYards" class="passenger-station" alt="HudsonYards Station" coords="21,163,11" shape="circle"/>
+          <area id="TimesSquare" class="passenger-station" alt="TimesSquare Station" coords="113,163,11" shape="circle"/>
+          <area id="Ave5" class="passenger-station" alt="Ave5 Station" coords="149,175,11" shape="circle"/>
+          <area id="GrandCentral" class="passenger-station" alt="GrandCentral Station" coords="182,195,11" shape="circle"/>
+          <area id="Vernon" class="passenger-station" alt="Vernon Station" coords="311,265,11" shape="circle"/>
+          <area id="HuntersPoint" class="passenger-station" alt="HuntersPoint Station" coords="351,273,11" shape="circle"/>
+          <area id="CourtSquare" class="passenger-station" alt="CourtSquare Station" coords="372,240,11" shape="circle"/>
+          <area id="QueensboroPlaza" class="passenger-station" alt="QueensboroPlaza Station" coords="402,197,11" shape="circle"/>
+          <area id="St33" class="passenger-station" alt="St33 Station" coords="459,251,11" shape="circle"/>
+          <area id="St40" class="passenger-station" alt="St40 Station" coords="498,256,11" shape="circle"/>
+          <area id="St46" class="passenger-station" alt="St46 Station" coords="540,263,11" shape="circle"/>
+          <area id="St52" class="passenger-station" alt="St52 Station" coords="577,257,11" shape="circle"/>
+          <area id="St61" class="passenger-station" alt="St61 Station" coords="629,246,11" shape="circle"/>
+          <area id="St69" class="passenger-station" alt="St69 Station" coords="667,237,11" shape="circle"/>
+          <area id="St74" class="passenger-station" alt="St74 Station" coords="712,233,11" shape="circle"/>
+          <area id="St82" class="passenger-station" alt="St82 Station" coords="748,227,11" shape="circle"/>
+          <area id="St90" class="passenger-station" alt="St90 Station" coords="790,222,11" shape="circle"/>
+          <area id="JunctionBlvd" class="passenger-station" alt="JunctionBlvd Station" coords="829,217,11" shape="circle"/>
+          <area id="St103" class="passenger-station" alt="St103 Station" coords="881,210,11" shape="circle"/>
+          <area id="St111" class="passenger-station" alt="St111 Station" coords="918,202,11" shape="circle"/>
+          <area id="WilletsPoint" class="passenger-station" alt="WilletsPoint Station" coords="986,176,11" shape="circle"/>
+          <area id="MainSt" class="passenger-station" alt="MainSt Station" coords="1080,138,11" shape="circle"/>
+        </map>
+      </div>
+      <!-- HTML !-->
+      <div class="mt-4">
+        <button class="graph-button d-none" id="transient-train-graph">Live Train Graphs</button>
+      </div>
+      <h4 class="separator mt-4">Modify Station</h4>
+
+      <div id="station-content">
+        <table id="station-table" class="table table-striped">
+          <thead>
+            <tr style="background-color: #e5e0f9;">
+              <th scope="col">Station</th>
+              <!-- <th scope="col">Default</th> -->
+              <th scope="col">EV Size (MW)</th>
+              <th scope="col">Solar Size (kW)</th>
+              <th scope="col">Battery Size (MW)</th>
+              <th scope="col">Flywheel Size (MW)</th>
+              <th scope="col">Supercapacitor Size (MW)</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="no-data-row">
+              <td colspan="9">
+                <h2 class="no-data-text">No Data Available</h2>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <button class="station-button" id="add-line">Add</button>
+        <h4 class="separator mt-4">Simulate Live Train</h4>
+
+        <table id="transient-table" class="table table-striped">
+          <thead>
+            <tr style="background-color: #e5e0f9;">
+              <th scope="col">Origin Station</th>
+              <th scope="col">Destination Station</th>
+              <th scope="col">Train Type</th>
+              <!-- <th scope="col"></th> -->
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="transient-no-data-row">
+              <td colspan="4">
+                <h2 class="no-data-text">No Data Available</h2>
+                <!-- <button class="station-button" id="add-transient-line">Add</button> -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mb-3">
+          <button class="station-button" id="add-transient-line">Add</button>
+        </div>
+        <button class="calculate-button" id="calculate-record">Calculate</button>
+      </div>
+
+      <div class="modal" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h4 id="modal-graph-title" class="modal-title w-100 font-weight-bold"></h4>
+              <button type="button" id="close-graph-modal" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body mx-3" id="map-graphs">
+              <!-- <img name="stedy" class="modal-content" id="stedy_img"/>
+              <img name="transient" style="display:none;" class="modal-content" id="transient_img"/>
+              <div class="graph-type-options">
+                <input type="radio" name="graph_type" id="stedy" value="stedy" checked>
+                <label class="modal-labels" for="stedy">24 Hr</label>
+                <input type="radio" name="graph_type" id="transient" value="transient">
+                <label class="modal-labels" for="transient">Live</label>
+              </div>
+              <div id="caption"></div> -->
+              <div id="caption" class="d-none"></div>
+              <a class="prev" onclick="plusGSlides(-1)">❮</a>
+              <a class="next" onclick="plusGSlides(1)">❯</a>
+              <!-- <div class="graph-type-options" style="text-align:center">
+                <span class="dot" onclick="currentGSlide(1)"></span>
+                <span class="dot" onclick="currentGSlide(2)"></span>
+                <span class="dot" onclick="currentGSlide(3)"></span>
+                <span class="dot" onclick="currentGSlide(4)"></span>
+                <span class="dot" onclick="currentGSlide(5)"></span>
+                <span class="dot" onclick="currentGSlide(6)"></span>
+                <span class="dot" onclick="currentGSlide(7)"></span>
+                <span class="dot" onclick="currentGSlide(8)"></span>
+                <span class="dot" onclick="currentGSlide(9)"></span>
+                <span class="dot" onclick="currentGSlide(10)"></span>
+                <span class="dot" onclick="currentGSlide(11)"></span>
+                <span class="dot" onclick="currentGSlide(12)"></span>
+                <span class="dot" onclick="currentGSlide(13)"></span>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal transient-train-graph-modal" id="TransientTrainGraphModal" role="dialog" aria-labelledby="TransientTrainGraphModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h4 class="modal-title w-100 font-weight-bold">Transient Train Graphs</h4>
+              <button type="button" id="train_graph_close" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body mx-3">
+              <div class="mySlides">
+                <img id="TrainAcceleration" src="{% static 'Orig_TrainGraphs_Transient/TrainAcceleration.png' %}" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <img id="TrainCurrent" src="{% static 'Orig_TrainGraphs_Transient/TrainCurrent.png' %}" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <img id="TrainDistance" src="{% static 'Orig_TrainGraphs_Transient/TrainDistance.png' %}" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <img id="TrainLocation" src="{% static 'Orig_TrainGraphs_Transient/TrainLocation.png' %}" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <img id="TrainPower" src="{% static 'Orig_TrainGraphs_Transient/TrainPower.png' %}" style="width:100%">
+              </div>
+              <div class="mySlides">
+                <img id="TrainSpeed" src="{% static 'Orig_TrainGraphs_Transient/TrainSpeed.png' %}" style="width:100%">
+              </div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+            <div class="graph-type-options" style="text-align:center">
+              <span class="dot" onclick="currentSlide(1)"></span>
+              <span class="dot" onclick="currentSlide(2)"></span>
+              <span class="dot" onclick="currentSlide(3)"></span>
+              <span class="dot" onclick="currentSlide(4)"></span>
+              <span class="dot" onclick="currentSlide(5)"></span>
+              <span class="dot" onclick="currentSlide(6)"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <!-- end about section -->
+{% endblock %}
+
+{% block javascript %}
+  <!-- {% comment %} <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'js/select2.min.js' %}"></script> {% endcomment %} -->
+  <script>
+
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) {slideIndex = 1}    
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+    }
+
+    let gIndex = 1
+    function plusGSlides(n) {
+      let currentActiveSlide = document.getElementsByClassName("active-graph");
+      let currentActiveSlideIndex = parseInt($(currentActiveSlide).attr('index'))
+      $('.stedy_option').prop('checked', true)
+      $('.transient_option').prop('checked', false)
+      $('.stedy_img').show()
+      $('.transient_img').hide()
+      showGraphSlides(currentActiveSlideIndex += n);
+    }
+
+    function currentGSlide(n) {
+      showGraphSlides(gIndex = n);
+    }
+
+    function showGraphSlides(n) {
+      var stationDict = {'Hudson34': '34 St-Hudson Yards Substation', 'Ave10': '10th Ave Substation', 'Ave7': '7 Ave-43 St Substation', 'Park': 'Park Ave-41 St Substation', 'Tudor': 'Tudor Substation', 'Ave50': '50 Ave-11 St Substation', 'Jackson': 'Jackson Ave-West St Substation', 'QueensBlvd': 'Queens Blvd-39 Place Substation', 'St58': '58 St Substation', 'St78': 'Roosevelt-78 St Substation', 'Spruce': 'Roosevelt-Spruce St Substation', 'Corona': 'Corona Yard Substation', 'Lawrence': 'Lawrence Substation'}
+      let i;
+      let indexCount = 1
+      let slides = document.getElementsByClassName("myGSlides");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        $(slides[i]).removeClass('active-graph')
+      }
+      console.log(n,"++++ N ++++")
+      if(n == 14){
+        indexCount = 1
+      }
+      else if(n == 0){
+        indexCount = 13
+      }
+      else{
+        indexCount = n
+      }
+      slides[indexCount-1].style.display = "block";
+      $(slides[indexCount-1]).addClass('active-graph')
+      var keys = Object.keys(stationDict);
+      var graphElementValue = stationDict[keys[indexCount-1]];
+      modalTitle.innerHTML = graphElementValue;
+      captionText.innerHTML = graphElementValue
+      
+    }
+
+    var modal = document.getElementById('myModal')
+    var graphModal = document.getElementById('TransientTrainGraphModal')
+    var transient_modal = document.getElementById('transient_modal')
+    var modalImg = document.getElementById('stedy_img')
+    var transient_stedy_img = document.getElementById('transient_img')
+    var mta_chat_data = {'power': {}, 'passenger': {}}
+    var transient_data = {}
+    var captionText = document.getElementById('caption')
+    var modalTitle = document.getElementById('modal-graph-title')
+
+    var mta_modal = document.getElementById('mta_7_line_modal')
+    var span = document.getElementsByClassName('mta_close')
+    // $('#mta_power_stations').select2();
+    // $('#mta_passenger_stations').select2();
+    $('#train_graph_close').click(function () {
+      $('#TrainAcceleration').attr('src', '/static/Orig_TrainGraphs_Transient/TrainAcceleration.png')
+      $('#TrainCurrent').attr('src', '/static/Orig_TrainGraphs_Transient/TrainCurrent.png')
+      $('#TrainDistance').attr('src', '/static/Orig_TrainGraphs_Transient/TrainDistance.png')
+      $('#TrainLocation').attr('src', '/static/Orig_TrainGraphs_Transient/TrainLocation.png')
+      $('#TrainPower').attr('src', '/static/Orig_TrainGraphs_Transient/TrainPower.png')
+      $('#TrainSpeed').attr('src', '/static/Orig_TrainGraphs_Transient/TrainSpeed.png')
+      $(graphModal).css('display', 'none')
+    })
+    $(span).click(function () {
+      $(mta_modal).css('display', 'none')
+      $(transient_modal).css('display', 'none')
+      modal.style.display = 'none'
+    })
+    var powerStation = $('#power_station_option');;
+    var passengerStation = $('#passenger_station_option');
+    var powerStationOption = $('.power_station_option');
+    var passengerStationOption = $('.passenger_station_option');
+
+    powerStation.click(function () {
+      if($(this).prop('checked')) {
+          powerStationOption.removeClass('d-none');
+          passengerStationOption.addClass('d-none');
+      }
+    });
+
+    passengerStation.click(function () {
+      if($(this).prop('checked')) {
+        passengerStationOption.removeClass('d-none');
+        powerStationOption.addClass('d-none');
+        }
+    });
+    $('#calculate-record').click(function () {
+      var rowCount = $('#station-table tr').length;
+      if(rowCount <= 2 && JSON.stringify(transient_data) === '{}'){
+        alert("Please, Add stations first or Add transient station !");
+      }
+      else{
+        html_data = {'mta_chat_data': mta_chat_data, 'transient_data': transient_data}
+        $('.loading').show();
+        $.ajax({
+          url: '{% url "update_graph_multiple" %}',
+          data: {
+              value: JSON.stringify(html_data)
+          },
+          dataType: 'json',
+          success: function (data) {
+            for (let i = 0; i < data.graphs.length; i++) {
+              var areaImg = document.getElementById(data.graphs[i])
+              areaImg.setAttribute("image_file", 'static/ModGraphs_SteadyState/'+data.graphs[i]+'.png');
+              areaImg.setAttribute("transient_image_file", 'static/ModGraphs_Transient/'+data.graphs[i]+'.png');
+            }
+            $('.loading').hide();
+            confirm("Graph updated successfully !");
+            if(data.trasient_part){
+              $('#transient-train-graph').removeClass('d-none')
+            }
+          },
+          error: function(xhr, status, error) {
+            $('.loading').hide();
+            alert("An error occurred while updating the graph. Please try again later.");
+          }
+      })
+    }
+
+    })
+    function transient_check_validation(){
+      var validation_fire = 0
+      var originStation = $('select[name="origin_station"]')
+      var destinationStation = $('select[name="destination_station"]')
+      var trainType = $('select[name="train_type"]')
+      if(originStation.val() == ''){
+        originStation[0].setCustomValidity("Please, Select Origin station")
+        originStation[0].reportValidity()
+        validation_fire = 1
+      }
+      if(destinationStation.val() == ''){
+        destinationStation[0].setCustomValidity("Please, Select Destination station")
+        destinationStation[0].reportValidity()
+        validation_fire = 1
+      }
+      if(originStation.val() == destinationStation.val()){
+        destinationStation[0].setCustomValidity("Please, Select different destination station")
+        destinationStation[0].reportValidity()
+        validation_fire = 1
+      }
+      if(trainType.val() == ''){
+        trainType[0].setCustomValidity("Please, Select Train type")
+        trainType[0].reportValidity()
+        validation_fire = 1
+      }
+      if(validation_fire == 1){
+        return false
+      }
+      else{
+        return true
+      }
+    }
+    function mta_check_validation(){
+      var validation_fire = 0
+      var mainOption = $('input[name="main-option"]:checked')
+      var powerStationValue = $('select[name="power_stations"]')
+      var passengerStationValue = $('select[name="passenger_stations"]')
+      if(mainOption.val() == 'power' && powerStationValue.val() == ''){
+        powerStationValue[0].setCustomValidity("Please, Select Power station")
+        powerStationValue[0].reportValidity()
+        validation_fire = 1
+      }
+      if(mainOption.val() == 'passenger' && passengerStationValue.val() == ''){
+        passengerStationValue[0].setCustomValidity("Please, Select Passenger station")
+        passengerStationValue[0].reportValidity()
+        validation_fire = 1
+      }
+      function validation(e){
+        if($(e).parent().css('display') == 'block'){
+          var min = parseInt($(e).attr('min'))
+          var max = parseInt($(e).attr('max') )
+          var value = parseFloat($(e).val())
+          if(min > value || max < value){
+            e.setCustomValidity(""+$(e).attr('label')+" must be between "+min+" and "+max+"")
+            e.reportValidity()
+            validation_fire = 1
+          }
+        }
+      }
+      $('.mta-energy_storage-parameter input').each(function (index) {
+        validation(this)
+      })
+      $('.mta-size-parameter input').each(function (index) {
+        validation(this)
+      })
+      if(validation_fire == 1){
+        return false
+      }
+      else{
+        return true
+      }
+    }
+    function check_station_limit(form_data){
+      const sizeParameters = {};
+      form_data.forEach(item => {
+        if (item.name.endsWith("_size")) {
+          sizeParameters[item.name] = parseFloat(item.value) || 0;
+        }
+      });
+      var total_mw = sizeParameters.ev_size + sizeParameters.solar_size/1000 + sizeParameters.battery_size + sizeParameters.fly_size + sizeParameters.supercapacitor_size
+      if(total_mw > 3){
+        return true
+      }
+      else{
+        return false
+      }
+    }
+    // $('input[name="graph_type"]:checked')
+    
+    $('input[name="graph_type"]').click(function (){
+      $('#myModal img').hide()
+      $('img[value="'+$(this).attr('id')+'"]').show()
+    })
+    $('a[name="transient_form_submit"]').click(function (){
+      if(transient_check_validation()){
+        var form = $('form#transient_details_form')
+        var form_data = form.serializeArray()
+        for (const [key, value] of Object.entries(form_data)) {
+          if(value['value'] != ''){
+            transient_data[value['name']] = value['value']
+          }
+          else{
+            transient_data[value['name']] = value['value']
+          }
+        }
+        var passengerStationDict = {'HudsonYards': '34 St-Hudson Yards', 'TimesSquare': 'Times Square-42 St', 'Ave5': '5 Ave', 'GrandCentral': 'Grand Central-42 St', 'Vernon': 'Vernon Blvd-Jackson Av', 'HuntersPoint': 'Hunters Point Av', 'CourtSquare': 'Court Square', 'QueensboroPlaza': 'Queensboro Plaza', 'St33': '33 St-Rawson St', 'St40': '40 St-Lowery St', 'St46': '46 St-Bliss St', 'St52': '52 St', 'St61': '61 St-Woodside', 'St69': '69 St', 'St74': '74 St-Broadway', 'St82': '82 St-Jackson Hts', 'St90': '90 St-Elmhurst Av', 'JunctionBlvd': 'Junction Blvd', 'St103': '103 St-Corona Plaza', 'St111': '111 St', 'WilletsPoint': 'Mets-Willets Pt', 'MainSt': 'Flushing-Main St'}
+        $('#transient-table tr[name="'+transient_data.origin_station+'"]').remove()
+        var temp = `<tr class="t-station" style="background-color:#f3efe0;" name="${transient_data.origin_station}">
+          <td>${passengerStationDict[transient_data.origin_station]}</td>
+          <td>${passengerStationDict[transient_data.destination_station]}</td>
+          <td>${transient_data.train_type}</td>
+          <td>
+            <img value="${transient_data.origin_station}" name="delete" style="width:20px;" src="${$('#mta_7_line_details').attr('delete-src')}" alt="">
+          </td>
+        </tr>`
+        $('#transient-table tr:last').after(temp);
+        $('#transient-no-data-row').addClass('d-none');
+        $('#add-transient-line').addClass('d-none');
+
+        transient_modal.style.display = 'none'
+        $('.t-station td img').off('click');
+        $('.t-station td img').click(function () {
+          var value = $(this).attr('value')
+          if($(this).attr('name') == 'delete'){
+            console.log(value,"--=-==-===-=-=-=")
+            $('#transient-train-graph').addClass('d-none')
+            $('.t-station[name="'+value+'"]').remove()
+            var rowCount = $('#transient-table tr').length;
+              
+            if(rowCount == 2){
+              $('#transient-no-data-row').removeClass('d-none');
+              $('#add-transient-line').removeClass('d-none');
+            }
+            transient_data = {}
+          }
+        })
+
+      }
+    })
+    $('a[name="mta_form_submit"]').click(function () {
+      if(mta_check_validation()){
+      var form = $('form#mta_7_line_details_form')
+      var form_data = form.serializeArray()
+      if(check_station_limit(form_data)){
+        alert("Station limit exceed, Please keep it below 3MW !!");
+      }
+      else{
+        var power_station_data = {}
+        var passenger_station_data = {}
+        var mainOptionValue = ''
+        for (let i = 0; i < form_data.length; i++) {
+          if (form_data[i].name === "main-option") {
+              mainOptionValue = form_data[i].value;
+              break;
+          }
+        }
+        for (const [key, value] of Object.entries(form_data)) {
+          if(mainOptionValue == 'power'){
+              if(value['value'] != ''){
+                  power_station_data[value['name']] = value['value']
+              }
+              else{
+                  power_station_data[value['name']] = value['value']
+              }
+            }
+          else{
+            if(value['value'] != ''){
+                  passenger_station_data[value['name']] = value['value']
+              }
+              else{
+                  passenger_station_data[value['name']] = value['value']
+            }
+          }
+        }
+          console.log(power_station_data,"------ FORM DATA -------",passenger_station_data)
+          if(mainOptionValue === 'power') {
+            mta_chat_data['power'][power_station_data.power_stations] = power_station_data;
+          }
+          else{
+            mta_chat_data['passenger'][passenger_station_data.passenger_stations] = passenger_station_data;
+          }
+          console.log(mta_chat_data,"*******************************")
+          var station_default = 0
+          var ev_size = '-'
+          var solar_size = '-'
+          var battery_size = '-'
+          var fly_size = '-'
+          var supercapacitor_size = '-'
+
+          if(power_station_data.hasOwnProperty('default')){
+            station_default = 1
+          }
+          if(power_station_data.ev_size != ""){
+            ev_size = power_station_data.ev_size
+          }
+          if(power_station_data.solar_size != ""){
+            solar_size = power_station_data.solar_size
+          }
+          if(power_station_data.battery_size != ""){
+            battery_size = power_station_data.battery_size
+          }
+          if(power_station_data.fly_size != ""){
+            fly_size = power_station_data.fly_size
+          }
+          if(power_station_data.supercapacitor_size != ""){
+            supercapacitor_size = power_station_data.supercapacitor_size
+          }
+
+          var passenger_station_default = 0
+          var passenger_ev_size = '-'
+          var passenger_solar_size = '-'
+          var passenger_battery_size = '-'
+          var passenger_fly_size = '-'
+          var passenger_supercapacitor_size = '-'
+          if(passenger_station_data.hasOwnProperty('default')){
+            passenger_station_default = 1
+          }
+          if(passenger_station_data.ev_size != ""){
+            passenger_ev_size = passenger_station_data.ev_size
+          }
+          if(passenger_station_data.solar_size != ""){
+            passenger_solar_size = passenger_station_data.solar_size
+          }
+          if(passenger_station_data.battery_size != ""){
+            passenger_battery_size = passenger_station_data.battery_size
+          }
+          if(passenger_station_data.fly_size != ""){
+            passenger_fly_size = passenger_station_data.fly_size
+          }
+          if(passenger_station_data.supercapacitor_size != ""){
+            passenger_supercapacitor_size = passenger_station_data.supercapacitor_size
+          }
+          var temp = ''
+          if(mainOptionValue == 'power'){
+            // Removed before EV size
+            // <td>${station_default}</td>
+            var stationDict = {'Hudson34': '34 St-Hudson Yards Substation', 'Ave10': '10th Ave Substation', 'Ave7': '7 Ave-43 St Substation', 'Park': 'Park Ave-41 St Substation', 'Tudor': 'Tudor Substation', 'Ave50': '50 Ave-11 St Substation', 'Jackson': 'Jackson Ave-West St Substation', 'QueensBlvd': 'Queens Blvd-39 Place Substation', 'St58': '58 St Substation', 'St78': 'Roosevelt-78 St Substation', 'Spruce': 'Roosevelt-Spruce St Substation', 'Corona': 'Corona Yard Substation', 'Lawrence': 'Lawrence Substation'}
+            $('#station-table tr[name="'+power_station_data.power_stations+'"]').remove()
+              var temp = `<tr class="p-station" style="background-color:#f9e4e4;" name="${power_station_data.power_stations}">
+                <th scope="row">${stationDict[power_station_data.power_stations]}</th>
+                <td>${ev_size}</td>
+                <td>${solar_size}</td>
+                <td>${battery_size}</td>
+                <td>${fly_size}</td>
+                <td>${supercapacitor_size}</td>
+                <td>
+                  <img value="${power_station_data.power_stations}" option="power" name="edit" style="width:20px;" src="${$('#mta_7_line_details').attr('edit-src')}" alt="">
+                </td>
+                <td>
+                  <img value="${power_station_data.power_stations}" option="power" name="delete" style="width:20px;" src="${$('#mta_7_line_details').attr('delete-src')}" alt="">
+                </td>
+              </tr>`
+            }
+            else{
+              var passengerStationDict = {'HudsonYards': '34 St-Hudson Yards', 'TimesSquare': 'Times Square-42 St', 'Ave5': '5 Ave', 'GrandCentral': 'Grand Central-42 St', 'Vernon': 'Vernon Blvd-Jackson Av', 'HuntersPoint': 'Hunters Point Av', 'CourtSquare': 'Court Square', 'QueensboroPlaza': 'Queensboro Plaza', 'St33': '33 St-Rawson St', 'St40': '40 St-Lowery St', 'St46': '46 St-Bliss St', 'St52': '52 St', 'St61': '61 St-Woodside', 'St69': '69 St', 'St74': '74 St-Broadway', 'St82': '82 St-Jackson Hts', 'St90': '90 St-Elmhurst Av', 'JunctionBlvd': 'Junction Blvd', 'St103': '103 St-Corona Plaza', 'St111': '111 St', 'WilletsPoint': 'Mets-Willets Pt', 'MainSt': 'Flushing-Main St'}
+              $('#station-table tr[name="'+passenger_station_data.passenger_stations+'"]').remove()
+                var temp = `<tr class="p-station" style="background-color:#e0f3e2;" name="${passenger_station_data.passenger_stations}">
+                  <th scope="row">${passengerStationDict[passenger_station_data.passenger_stations]}</th>
+                  <td>${passenger_ev_size}</td>
+                  <td>${passenger_solar_size}</td>
+                  <td>${passenger_battery_size}</td>
+                  <td>${passenger_fly_size}</td>
+                  <td>${passenger_supercapacitor_size}</td>
+                  <td>
+                    <img value="${passenger_station_data.passenger_stations}" option="passenger" name="edit" style="width:20px;" src="${$('#mta_7_line_details').attr('edit-src')}" alt="">
+                  </td>
+                  <td>
+                    <img value="${passenger_station_data.passenger_stations}" option="passenger" name="delete" style="width:20px;" src="${$('#mta_7_line_details').attr('delete-src')}" alt="">
+                  </td>
+                </tr>`
+            }
+            $('#station-table tr:last').after(temp);
+          // }
+          $('#no-data-row').addClass('d-none');
+
+          mta_modal.style.display = 'none'
+          $('.p-station td img').off('click');
+          $('.p-station td img').click(function () {
+          var value = $(this).attr('value')
+          if($(this).attr('name') == 'delete'){
+            $('.p-station[name="'+value+'"]').remove()
+            var rowCount = $('#station-table tr').length;
+            if(rowCount == 2){
+              $('#no-data-row').removeClass('d-none');
+            }
+            if($(this).attr('option') == 'power'){
+              delete mta_chat_data.power[value];
+            }
+            else{
+              delete mta_chat_data.passenger[value];
+            }
+          }
+          if($(this).attr('name') == 'edit'){
+            if($(this).attr('option') == 'power'){
+              mta_form_load_data(value)
+            }
+            else{
+              mta_passenger_form_load_data(value)
+            }
+          }
+        })
+      }
+    }
+    })
+    function mta_form_load_data(power_station){
+      $('#mta_power_stations').empty()
+      var powerstationDict = { 'Hudson34': '34 St-Hudson Yards Substation', 'Ave10': '10th Ave Substation', 'Ave7': '7 Ave-43 St Substation', 'Park': 'Park Ave-41 St Substation', 'Tudor': 'Tudor Substation', 'Ave50': '50 Ave-11 St Substation', 'Jackson': 'Jackson Ave-West St Substation', 'QueensBlvd': 'Queens Blvd-39 Place Substation', 'St58': '58 St Substation', 'St78': 'Roosevelt-78 St Substation', 'Spruce': 'Roosevelt-Spruce St Substation', 'Corona': 'Corona Yard Substation', 'Lawrence': 'Lawrence Substation' }
+      $('#mta_power_stations').append('<option name="" value="">Select Power Station</option>');
+      for (const [key, value] of Object.entries(powerstationDict)) {
+        $('#mta_power_stations').append(`<option name="${key}" value="${key}">${value}</option>`);
+      }
+      for (const [key, value] of Object.entries(mta_chat_data.power)) {
+        if(power_station != key){
+        $('#mta_power_stations option[name="'+key+'"]').remove()
+        }
+      }
+      $('#power_station_option').prop('checked',true)
+      $('#mta_power_stations option[name="'+power_station+'"]').prop('selected', true);
+      mta_modal.style.display = 'block'
+      for (const [key, value] of Object.entries(mta_chat_data.power[power_station])) {
+        var temp = $('form#mta_7_line_details_form [name="'+key+'"]')
+        if(temp[0].tagName == 'INPUT'){
+          if(temp.attr('type') == 'checkbox'){
+            temp.prop('checked', value)
+          }
+          if(temp.attr('type') == 'number'){
+            temp.val(value)
+          }
+        }
+      }
+    }
+
+    function mta_passenger_form_load_data(passenger_station){
+      $('#mta_passenger_stations').empty()
+      var passengerstationDict = {'HudsonYards': '34 St-Hudson Yards', 'TimesSquare': 'Times Square-42 St', 'Ave5': '5 Ave', 'GrandCentral': 'Grand Central-42 St', 'Vernon': 'Vernon Blvd-Jackson Av', 'HuntersPoint': 'Hunters Point Av', 'CourtSquare': 'Court Square', 'QueensboroPlaza': 'Queensboro Plaza', 'St33': '33 St-Rawson St', 'St40': '40 St-Lowery St', 'St46': '46 St-Bliss St', 'St52': '52 St', 'St61': '61 St-Woodside', 'St69': '69 St', 'St74': '74 St-Broadway', 'St82': '82 St-Jackson Hts', 'St90': '90 St-Elmhurst Av', 'JunctionBlvd': 'Junction Blvd', 'St103': '103 St-Corona Plaza', 'St111': '111 St', 'WilletsPoint': 'Mets-Willets Pt', 'MainSt': 'Flushing-Main St'}
+      $('#mta_passenger_stations').append('<option name="" value="">Select Passenger Station</option>');
+      for (const [key, value] of Object.entries(passengerstationDict)) {
+        $('#mta_passenger_stations').append(`<option name="${key}" value="${key}">${value}</option>`);
+      }
+      for (const [key, value] of Object.entries(mta_chat_data.passenger)) {
+        console.log(key,"++++++++++",value,"++++++++++",passenger_station)
+        if(passenger_station != key){
+          $('#mta_passenger_stations option[name="'+key+'"]').remove()
+        }
+      }
+      $('#mta_passenger_stations option[name="'+passenger_station+'"]').prop('selected', true);
+      $('#passenger_station_option').prop('checked',true)
+      mta_modal.style.display = 'block'
+      for (const [key, value] of Object.entries(mta_chat_data.passenger[passenger_station])) {
+        var temp = $('form#mta_7_line_details_form [name="'+key+'"]')
+        if(temp[0].tagName == 'INPUT'){
+          if(temp.attr('type') == 'checkbox'){
+            temp.prop('checked', value)
+          }
+          if(temp.attr('type') == 'number'){
+            temp.val(value)
+          }
+        }
+      }
+    }
+
+    function clear_mta_line_option(e){
+      $('form#mta_7_line_details_form :input').val('')
+      $('form#mta_7_line_details_form :input').prop('checked', false)
+    }
+    function hide_show_solar(e){
+      if($(e).attr('name') == 'power_stations'){
+        var pStation = ['Hudson34', 'Ave10', 'Ave7', 'Park', 'Tudor', 'Ave50', 'QueensBlvd']
+        if(pStation.includes($(e).val()) || $(e).val() == ''){
+          $('.solar-check-box').addClass('d-none')
+        }
+        else{
+          $('.solar-check-box').removeClass('d-none')
+        }
+      }
+      else{
+        var psgStation = ['HudsonYards', 'TimesSquare', 'Ave5', 'GrandCentral', 'Vernon', 'HuntersPoint']
+        if(psgStation.includes($(e).val()) || $(e).val() == ''){
+          $('.solar-check-box').addClass('d-none')
+        }
+        else{
+          $('.solar-check-box').removeClass('d-none')
+        }
+      }
+    }
+    function check_mta_line_option(e){
+      var temp = 0
+      if(e){
+        if($(e).attr('name') == 'default'){    
+          var defaut_props = $(e).prop('checked')
+          if(defaut_props){
+            $('input.mta-facility-option#mta_electric_vehicle').prop('checked', false)
+            $('input.mta-facility-option#mta_energy_storage').prop('checked', false)
+            $('input.mta-facility-option#mta_solar').prop('checked', false)
+          }
+        }else{
+          $('input.mta-facility-option[name="default"]').prop('checked',false)
+        }
+      }
+      if($('#mta_electric_vehicle').prop('checked')){
+        $('.electric_vehicle_expand').show()
+        temp += 1
+      }else{
+        $('#ev_size').val(0)
+        $('.electric_vehicle_expand').hide()
+      }
+      if($('#mta_energy_storage').prop('checked')){
+        $('.energy_storage_expand').show()
+        temp += 1
+      }else{
+        $('.energy_storage_expand').hide()
+      }
+      if($('#mta_solar').prop('checked')){
+        $('.solar_expand').show()
+        temp += 1
+      }else{
+        $('#solar_size').val(0)
+        $('.solar_expand').hide()
+      }
+      if($('#mta_battery').prop('checked')){
+        $('.battery_expand').show()
+        temp += 1
+      }else{
+        $('#battery_size').val(0)
+        $('.battery_expand').hide()
+      }
+      if($('#mta_fly_wheel').prop('checked')){
+        $('.fly_wheel_expand').show()
+        temp += 1
+      }else{
+        $('#fly_size').val(0)
+        $('.fly_wheel_expand').hide()
+      }
+      if($('#mta_supercapacitor').prop('checked')){
+        $('.supercapacitor_expand').show()
+        temp += 1
+      }else{
+        $('#supercapacitor_size').val(0)
+        $('.supercapacitor_expand').hide()
+      }
+      if(temp == 0){
+        $('input.mta-facility-option[name="default"]').prop('checked',true)
+      }else{
+        $('input.mta-facility-option[name="default"]').prop('checked',false)
+      }
+    }
+    
+    $('#add-line, .passenger-station').click(function () {
+      $('#mta_7_line_details_form')[0].reset();
+      powerStationOption.removeClass('d-none');
+      passengerStationOption.addClass('d-none');
+      mta_modal.style.display = 'block'
+      $('#mta_7_line_details_form input').prop('checked',false)
+      $('#power_station_option').prop('checked',true)
+      $('#mta_7_line_details_form input').change(function () {
+        check_mta_line_option(this)
+      })
+      $('#mta_power_stations, #mta_passenger_stations').change(function () {
+        hide_show_solar(this)
+      })
+      check_mta_line_option(false)
+      $('#mta_power_stations').empty()
+      $('#mta_passenger_stations').empty()
+      var powerstationDict = {'Hudson34': '34 St-Hudson Yards Substation', 'Ave10': '10th Ave Substation', 'Ave7': '7 Ave-43 St Substation', 'Park': 'Park Ave-41 St Substation', 'Tudor': 'Tudor Substation', 'Ave50': '50 Ave-11 St Substation', 'Jackson': 'Jackson Ave-West St Substation', 'QueensBlvd': 'Queens Blvd-39 Place Substation', 'St58': '58 St Substation', 'St78': 'Roosevelt-78 St Substation', 'Spruce': 'Roosevelt-Spruce St Substation', 'Corona': 'Corona Yard Substation', 'Lawrence': 'Lawrence Substation'}
+      $('#mta_power_stations').append('<option name="" value="">Select Power Station</option>');
+      for (const [key, value] of Object.entries(powerstationDict)) {
+        $('#mta_power_stations').append(`<option name="${key}" value="${key}">${value}</option>`);
+      }
+      var passengerstationDict = {'HudsonYards': '34 St-Hudson Yards', 'TimesSquare': 'Times Square-42 St', 'Ave5': '5 Ave', 'GrandCentral': 'Grand Central-42 St', 'Vernon': 'Vernon Blvd-Jackson Av', 'HuntersPoint': 'Hunters Point Av', 'CourtSquare': 'Court Square', 'QueensboroPlaza': 'Queensboro Plaza', 'St33': '33 St-Rawson St', 'St40': '40 St-Lowery St', 'St46': '46 St-Bliss St', 'St52': '52 St', 'St61': '61 St-Woodside', 'St69': '69 St', 'St74': '74 St-Broadway', 'St82': '82 St-Jackson Hts', 'St90': '90 St-Elmhurst Av', 'JunctionBlvd': 'Junction Blvd', 'St103': '103 St-Corona Plaza', 'St111': '111 St', 'WilletsPoint': 'Mets-Willets Pt', 'MainSt': 'Flushing-Main St'}
+      $('#mta_passenger_stations').append('<option name="" value="">Select Passenger Station</option>');
+      for (const [key, value] of Object.entries(passengerstationDict)) {
+        $('#mta_passenger_stations').append(`<option name="${key}" value="${key}">${value}</option>`);
+      }
+      for (const [key, value] of Object.entries(mta_chat_data.power)) {
+        $('#mta_power_stations option[name="'+key+'"]').remove()
+      }
+      for (const [key, value] of Object.entries(mta_chat_data.passenger)) {
+        $('#mta_passenger_stations option[name="'+key+'"]').remove()
+      } 
+    })
+    $('#transient-train-graph').click(function () {
+      $('#TrainAcceleration').attr('src', '/static/TrainGraphs_Transient/TrainAcceleration.png')
+      $('#TrainCurrent').attr('src', '/static/TrainGraphs_Transient/TrainCurrent.png')
+      $('#TrainDistance').attr('src', '/static/TrainGraphs_Transient/TrainDistance.png')
+      $('#TrainLocation').attr('src', '/static/TrainGraphs_Transient/TrainLocation.png')
+      $('#TrainPower').attr('src', '/static/TrainGraphs_Transient/TrainPower.png')
+      $('#TrainSpeed').attr('src', '/static/TrainGraphs_Transient/TrainSpeed.png')
+      graphModal.style.display = 'block'
+    })
+    $('#add-transient-line').click(function () {
+      $('#transient_details_form')[0].reset();
+      powerStationOption.removeClass('d-none');
+      passengerStationOption.addClass('d-none');
+      transient_modal.style.display = 'block'
+      $('#transient_details_form input').prop('checked',false)
+      $('#power_station_option').prop('checked',true)
+      $('#transient_details_form input').change(function () {
+        check_mta_line_option(this)
+      })
+      $('#mta_power_stations, #mta_passenger_stations').change(function () {
+        hide_show_solar(this)
+      })
+      check_mta_line_option(false)
+      $('#mta_power_stations').empty()
+      $('#mta_passenger_stations').empty()
+      var powerstationDict = {'Hudson34': '34 St-Hudson Yards Substation', 'Ave10': '10th Ave Substation', 'Ave7': '7 Ave-43 St Substation', 'Park': 'Park Ave-41 St Substation', 'Tudor': 'Tudor Substation', 'Ave50': '50 Ave-11 St Substation', 'Jackson': 'Jackson Ave-West St Substation', 'QueensBlvd': 'Queens Blvd-39 Place Substation', 'St58': '58 St Substation', 'St78': 'Roosevelt-78 St Substation', 'Spruce': 'Roosevelt-Spruce St Substation', 'Corona': 'Corona Yard Substation', 'Lawrence': 'Lawrence Substation'}
+      $('#mta_power_stations').append('<option name="" value="">Select Power Station</option>');
+      for (const [key, value] of Object.entries(powerstationDict)) {
+        $('#mta_power_stations').append(`<option name="${key}" value="${key}">${value}</option>`);
+      }
+      var passengerstationDict = {'HudsonYards': '34 St-Hudson Yards', 'TimesSquare': 'Times Square-42 St', 'Ave5': '5 Ave', 'GrandCentral': 'Grand Central-42 St', 'Vernon': 'Vernon Blvd-Jackson Av', 'HuntersPoint': 'Hunters Point Av', 'CourtSquare': 'Court Square', 'QueensboroPlaza': 'Queensboro Plaza', 'St33': '33 St-Rawson St', 'St40': '40 St-Lowery St', 'St46': '46 St-Bliss St', 'St52': '52 St', 'St61': '61 St-Woodside', 'St69': '69 St', 'St74': '74 St-Broadway', 'St82': '82 St-Jackson Hts', 'St90': '90 St-Elmhurst Av', 'JunctionBlvd': 'Junction Blvd', 'St103': '103 St-Corona Plaza', 'St111': '111 St', 'WilletsPoint': 'Mets-Willets Pt', 'MainSt': 'Flushing-Main St'}
+      $('#mta_passenger_stations').append('<option name="" value="">Select Passenger Station</option>');
+      for (const [key, value] of Object.entries(passengerstationDict)) {
+        $('#mta_passenger_stations').append(`<option name="${key}" value="${key}">${value}</option>`);
+      }
+      for (const [key, value] of Object.entries(mta_chat_data.power)) {
+        $('#mta_power_stations option[name="'+key+'"]').remove()
+      }
+      for (const [key, value] of Object.entries(mta_chat_data.passenger)) {
+        $('#mta_passenger_stations option[name="'+key+'"]').remove()
+      } 
+    })
+
+    $('#energy_storage').change(function () {
+        if ($(this).prop('checked')) {
+            $('.battery-storage-expand').removeClass('d-none')
+            $('#battery').prop('checked', false)
+            $('#fly_wheel').prop('checked', false)
+            $('#supercapacitor').prop('checked', false)
+        } else {
+            $('.battery-storage-expand').addClass('d-none')
+            $('.battery-size-expand').addClass('d-none')
+            $('.fly-size-expand').addClass('d-none')
+            $('.supercapacitor-size-expand').addClass('d-none')
+        }
+    })
+    $('#electric_vehicle').change(function () {
+        if ($(this).prop('checked')) {
+            $('.ev-size-expand').removeClass('d-none')
+        } else {
+            $('.ev-size-expand').addClass('d-none')
+        }
+    })
+    $('#solar').change(function () {
+        if ($(this).prop('checked')) {
+            $('.solar-size-expand').removeClass('d-none')
+        } else {
+            $('.solar-size-expand').addClass('d-none')
+        }
+    })
+    $('#battery').change(function () {
+        if ($(this).prop('checked')) {
+            $('.battery-size-expand').removeClass('d-none')
+        } else {
+            $('.battery-size-expand').addClass('d-none')
+        }
+    })
+    $('#fly_wheel').change(function () {
+        if ($(this).prop('checked')) {
+            $('.fly-size-expand').removeClass('d-none')
+        } else {
+            $('.fly-size-expand').addClass('d-none')
+        }
+    })
+    $('input#default').change(function () {
+        var value = $(this).prop('checked')
+        if (value) {
+            $('#myModal').find('input').each(function (index) {
+                if ($(this).attr('id') != 'default') {
+                    $(this).prop('checked', false)
+                }
+            })
+        }
+        hide_clear_mta7_lines_data_input()
+
+    })
+    $('#myModal input').change(function () {
+        if ($(this).attr('id') != 'default') {
+            $('input#default').prop('checked', false)
+
+        }
+    })
+    $('#supercapacitor').change(function () {
+        if ($(this).prop('checked')) {
+            $('.supercapacitor-size-expand').removeClass('d-none')
+        } else {
+            $('.supercapacitor-size-expand').addClass('d-none')
+        }
+    })
+    $('.mta7_lines').click(function(){
+      var graphStationDict = ['Hudson34', 'Ave10', 'Ave7', 'Park', 'Tudor', 'Ave50', 'Jackson', 'QueensBlvd', 'St58', 'St78', 'Spruce', 'Corona', 'Lawrence']
+
+      for (let i = 0; i < graphStationDict.length; i++) {
+        var areaID = document.getElementById(graphStationDict[i])
+        var graphTemp = `<div class="myGSlides" index="${i+1}">
+              <img name="stedy" class="modal-content stedy_img" value="stedy-${graphStationDict[i]}" id="stedy_img" src="${$(areaID).attr('image_file')}" style=""/>
+              <img name="transient" style="display:none;" value="transient-${graphStationDict[i]}" class="modal-content transient_img" id="transient_img" src="${$(areaID).attr('transient_image_file')}" style=""/>
+              <div class="graph-type-options">
+                <input type="radio" class="stedy_option" name="graph_type_${graphStationDict[i]}" id="stedy-${graphStationDict[i]}" value="stedy" checked>
+                <label class="modal-labels" for="stedy-${graphStationDict[i]}">24 Hr</label>
+                <input type="radio" class="transient_option" name="graph_type_${graphStationDict[i]}" id="transient-${graphStationDict[i]}" value="transient">
+                <label class="modal-labels" for="transient-${graphStationDict[i]}">Live</label>
+              </div>
+              </div>`
+        $('#map-graphs').append(graphTemp)
+
+      }
+      
+      var currIndex = parseInt($(this).attr('index'))
+      let currentSlideGraph = document.getElementsByClassName("myGSlides")[currIndex-1];
+      currentSlideGraph.style.display = "block";
+      $(currentSlideGraph).addClass('active-graph')
+      // showGraphSlides(parseInt($(this).attr('index')));
+
+      modal.style.display = "block";
+      // modalImg.src = $(this).attr('image_file');
+      // transient_stedy_img.src = $(this).attr('transient_image_file');
+      captionText.innerHTML = $(this).attr('alt');
+      modalTitle.innerHTML = $(this).attr('alt');
+      // $($('input[name="graph_type"]')[0]).prop('checked', true);
+      // $('#myModal img').hide()
+      // $('img[name="stedy"]').show()
+      for (let i = 0; i < graphStationDict.length; i++) {
+        $('input[name="graph_type_'+ graphStationDict[i] +'"]').click(function (){
+          $('#myModal img').hide()
+          $('img[value="'+$(this).attr('id')+'"]').show()
+        })
+      }
+    });
+    $(document).keydown(function (event) {
+        if (event.keyCode == 27) {
+            modal.style.display = 'none'
+            mta_modal.style.display = 'none'
+            $(".myGSlides").remove();
+        }
+    })
+    function hide_clear_mta7_lines_data_input() {
+        $('.ev-size-expand').addClass('d-none')
+        $('.solar-size-expand').addClass('d-none')
+        $('.battery-storage-expand').addClass('d-none')
+        $('.battery-size-expand').addClass('d-none')
+        $('.fly-size-expand').addClass('d-none')
+        $('.supercapacitor-size-expand').addClass('d-none')
+    }
+    function clear_mta7_lines_data() {
+        hide_clear_mta7_lines_data_input()
+        $('select[name="power_stations"]').empty()
+        $('.facility-option').prop('checked', false)
+    }
+    // Get the <span> element that closes the modal
+    // When the user clicks on <span> (x), close the modal
+    var modalGraph = document.getElementById('myModal')
+    $('#close-graph-modal').click(function () {
+      modalGraph.style.display = 'none';
+      $(".myGSlides").remove();
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substation Data Chart</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="max-width: 800px; margin: 0 auto;">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <script>
+        // Your JavaScript code for creating the chart goes here
+
+        const substationData = {
+            origdata: [1,5,6,9,22,23,100],
+            default: 0,
+            moddata: [2,6,9,12,23,34,100],
+        };
+
+        const originalData = {
+            label: 'Original',
+            data: substationData.origdata,
+            borderColor: 'blue',
+            fill: false,
+        };
+
+        const modifiedData = {
+            label: 'Modified',
+            data: substationData.default === 0 ? substationData.moddata : [],
+            borderColor: 'red',
+            fill: false,
+        };
+
+        const chartData = {
+            labels: Array.from({ length: 24 }, (_, i) => i),
+            datasets: [originalData, modifiedData],
+        };
+
+        const chartConfig = {
+            type: 'line',
+            data: chartData,
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time [Hr]',
+                        },
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Power [W]',
+                        },
+                    },
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                },
+            },
+        };
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, chartConfig);
+    </script>
+</body>
+</html>
