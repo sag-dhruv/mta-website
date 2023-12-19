@@ -25,13 +25,11 @@ SECRET_KEY = 'django-insecure-s16*8=v95$%i*)09w(^cx(wy+c8*!u8kopj!i+qap78&8qqohi
 # SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
-DEBUG = os.environ.get('DEBUG','False').lower() == "true"
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
-
-# ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(" ")
 
 
 # Application definition
@@ -122,7 +120,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/mtasite/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
