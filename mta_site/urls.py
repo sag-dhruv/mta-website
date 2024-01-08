@@ -25,3 +25,4 @@ urlpatterns = [
     path('', views.index, name="INDEX"),
     path('mta-line/', include('mtasite.urls')),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
