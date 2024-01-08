@@ -20,12 +20,8 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-print(settings.STATIC_URL,"+++++ settings.STATIC_URL +++++")
-print(settings.STATIC_ROOT,"+++++ settings.STATIC_ROOT +++++")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="INDEX"),
     path('mta-line/', include('mtasite.urls')),
 ]
-print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),"*****")
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
