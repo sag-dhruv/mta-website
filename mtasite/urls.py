@@ -6,7 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', views.index, name="INDEX"),
     path('', views.mta_line, name="INDEX"),
-    path('mta-line', views.mta_line, name="MTA-Line"),
+    # path('mta-line', views.mta_line, name="MTA-Line"),
     # path('about', views.about, name="MTA-About"),
     # path('service', views.service, name="MTA-Service"),
     # path('blog', views.blog, name="MTAblog"),

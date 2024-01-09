@@ -208,7 +208,7 @@ class UpdateGraphMultiple(View):
 
 def index(request):
     response = redirect('/')
-    return render(request, 'index.html')
+    return render(request, 'mta7_line.html')
 
 
 def mta_line(request):

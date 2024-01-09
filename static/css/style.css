@@ -143,10 +143,6 @@ a:focus {
   color: #4b208c;
 }
 
-.custom_nav-container {
-  z-index: 99999;
-}
-
 .navbar-expand-lg .navbar-collapse {
   -webkit-box-align: end;
       -ms-flex-align: end;
